@@ -16,7 +16,7 @@ dotenv.config();
 //all environment variables are stored in .env file i.e process.env
 
 const app = express();
-app.use(express.json());
+app.use(express.json()); 
 // create express app
 
 const PORT = process.env.PORT || 5000;
