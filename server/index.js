@@ -24,12 +24,22 @@ const PORT = process.env.PORT || 5000;
 const databaseURL = process.env.DATABASE_URL;
 
 // cors is a middleware that allows cross-origin requests it is used to allow requests from different origins
+const allowedOrigins = [process.env.ORIGIN];
+
 app.use(cors({
-  origin: [process.env.ORIGIN], 
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
 }));
+
 
 
 
