@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 
 import { BrowserRouter, Routes,Route } from 'react-router-dom'
-import Auth from '@/pages/Auth'
+import Auth from './pages/auth'
 import { Navigate } from 'react-router-dom'
 import Profile from './pages/profile'
 import Chat from './pages/chat'
