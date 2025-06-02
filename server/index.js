@@ -26,7 +26,8 @@ const databaseURL = process.env.DATABASE_URL;
 // const allowedOrigins = [process.env.ORIGIN];
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://chatfd.onrender.com", // replace with your actual frontend deploy URL
+  "https://chatfd.onrender.com",
+  "https://chat-fd.onrender.com",
 ];
 app.use(cors({
   origin: function (origin, callback) {
