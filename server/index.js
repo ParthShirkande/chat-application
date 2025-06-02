@@ -16,7 +16,6 @@ dotenv.config();
 //all environment variables are stored in .env file i.e process.env
 
 const app = express();
-app.use(express.json()); 
 // create express app
 
 const PORT = process.env.PORT || 5000;
@@ -24,28 +23,26 @@ const PORT = process.env.PORT || 5000;
 const databaseURL = process.env.DATABASE_URL;
 
 // cors is a middleware that allows cross-origin requests it is used to allow requests from different origins
+// const allowedOrigins = [process.env.ORIGIN];
 const allowedOrigins = [
   "http://localhost:5173",
   "https://chatfd.onrender.com", // replace with your actual frontend deploy URL
 ];
 app.use(cors({
   origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps, curl, etc.)
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true,
+  credentials: true, // Important if using cookies
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-app.get("/", (req, res) => {
-  res.send("✅ Backend is working!");
-});
-
+app.use(cookieParser());
+app.use(express.json()); 
 
 
 
@@ -53,9 +50,10 @@ app.use("/uploads/profiles",express.static("uploads/profiles"))
 app.use("/uploads/files",express.static("uploads/files"))
 
 
+app.get("/", (req, res) => {
+  res.send("✅ Backend is working!");
+});
 
-
-app.use(cookieParser());
 // parse cookies from the request
 console.log("Registering /api/auth");
 app.use("/api/auth", authRoutes);
