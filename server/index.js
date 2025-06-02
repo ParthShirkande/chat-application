@@ -24,8 +24,10 @@ const PORT = process.env.PORT || 5000;
 const databaseURL = process.env.DATABASE_URL;
 
 // cors is a middleware that allows cross-origin requests it is used to allow requests from different origins
-const allowedOrigins = [process.env.ORIGIN];
-
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://chatfd.onrender.com", // replace with your actual frontend deploy URL
+];
 app.use(cors({
   origin: function (origin, callback) {
     // allow requests with no origin (like mobile apps, curl, etc.)
