@@ -75,7 +75,7 @@ const server = app.listen(PORT, () => {
 
 
 
-setupSocket(server);
+setupSocket(server,allowedOrigins);
 
 mongoose.connect(databaseURL)
     .then(() => {
