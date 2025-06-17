@@ -7,11 +7,10 @@ import authRoutes from './routes/AuthRoutes.js';
 import contactRoutes from './routes/ContactRoutes.js'
 import messagesRoutes from './routes/MessageRoutes.js';
 import channelRoutes from './routes/ChannelRoutes.js';
+
+
 import setupSocket from './socket.js';
 
-
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 dotenv.config();
 //all environment variables are stored in .env file i.e process.env
@@ -23,18 +22,12 @@ const PORT = process.env.PORT || 5000;
 
 const databaseURL = process.env.DATABASE_URL;
 
-
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-
-
 // cors is a middleware that allows cross-origin requests it is used to allow requests from different origins
 // const allowedOrigins = [process.env.ORIGIN];
 const allowedOrigins = [
   "http://localhost:5173",
   "https://chatfd.onrender.com",
+  "https://chat-fd.onrender.com",
 ];
 app.use(cors({
   origin: function (origin, callback) {
@@ -74,13 +67,6 @@ app.use("/api/messages", messagesRoutes);
 
 console.log("Registering /api/channel");
 app.use("/api/channel", channelRoutes);
-
-
-
-app.use(express.static(path.join(__dirname, '../client/dist')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
-});
 
 
 const server = app.listen(PORT, () => {
