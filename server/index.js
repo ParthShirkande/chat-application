@@ -35,7 +35,6 @@ const __dirname = path.dirname(__filename);
 const allowedOrigins = [
   "http://localhost:5173",
   "https://chatfd.onrender.com",
-  "https://chat-fd.onrender.com",
 ];
 app.use(cors({
   origin: function (origin, callback) {
